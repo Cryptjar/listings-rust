@@ -1,0 +1,10 @@
+# Generated artifacts
+/std-names.toml
+/listings-rust.sty
+/demo.pdf
+# Latex generated files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out

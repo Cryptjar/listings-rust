@@ -1,0 +1,127 @@
+\documentclass[DIV13]{scrartcl}
+
+%\usepackage{listings}
+\usepackage{listings-rust}
+\usepackage[scaled=0.85]{beramono}
+\usepackage[T1]{fontenc}
+
+\usepackage{hyperref}
+
+\title{\texttt{listings-rust} demo}
+\author{Tobias Denkinger \\ \href{mailto:tobias.denkinger@gmx.de}{\texttt{tobias.denkinger@tu-dresden.de}}
+\and
+Adam Wagenhäuser \\ \href{mailto:adam.wagenhaeuser@fau.de}{\texttt{adam.wagenhaeuser@fau.de}}}
+
+% Adding our local custom types
+\lstset{%
+	morekeywords=[1]{Foo, TreeStack}, % structs
+	morekeywords=[3]Bar, % traits
+}
+
+\begin{document}
+
+\maketitle
+
+%\texttt{rust-defs} -- for definition like listings. Colors Traits, Structs, and Enums differently.
+
+\begin{lstlisting}[style=boxed,style=rust-defs,morekeywords={[1]Foo},morekeywords={[3]Bar}]
+/// A good struct
+struct Foo<T: Into<u32>(T);
+trait Bar {
+    fn bar(n: i32) -> &'static dyn Option<File>;
+}
+#[doc(hidden)]
+mod sub {
+    const BAR : &mut str = "123";
+    static FOO : u32 = 0x123_u32;
+}
+\end{lstlisting}
+
+
+%\texttt{rust} -- for normal Rust code. Less coloring.
+
+\begin{lstlisting}[style=rust]
+#[allow(unused)]
+pub const A: u32 = 42 as u32;
+// Conditonal branching
+if let Some(ref mut n) = crate::Foo::foo(A.pow(12)) {
+    return "Got some".to_string();
+} else {
+    let mut v = Vec::new();
+    v.push(A.to_string());
+    return String::from_iter(&v);
+}
+\end{lstlisting}
+
+
+%\texttt{rust-bw} -- the minimal style. No colors, keywords are bold.
+
+\begin{lstlisting}[style=lined,style=rust-bw]
+impl Bar for crate::Foo {
+    // The perfect implementation
+    #[must_use]
+    fn bar(n: i32) -> Option<File> {
+        let a = 42;
+        if let Some(n) = Foo::foo(a.pow(12)) {
+            return "Got some";
+        }
+    }
+}
+\end{lstlisting}
+
+\clearpage
+\section*{Style \texttt{rust-defs}}
+
+For definition like listings. Colors traits, structs, and enums differently.
+Colors from \texttt{docs.rs} definition colors.
+
+\subsection*{Some identifiers}
+\lstinputlisting[style=rust-defs]{demo-identifiers.rs}
+
+\clearpage
+\subsection*{Example file}
+\lstinputlisting[style=rust-defs,morekeywords={[1]TreeStack}]{demo-example.rs}
+
+
+\clearpage
+\section*{Style \texttt{rust}}
+
+For normal Rust code. Less coloring. Colors from \texttt{docs.rs} source code
+highlighting colors.
+
+\subsection*{Some identifiers}
+\lstinputlisting[style=rust]{demo-identifiers.rs}
+
+\clearpage
+\subsection*{Example file}
+\lstinputlisting[style=rust]{demo-example.rs}
+
+
+\clearpage
+\section*{Style \texttt{rust-bw}}
+
+The minimal style. No colors, keywords are bold.
+
+\subsection*{Some identifiers}
+\lstinputlisting[style=rust-bw]{demo-identifiers.rs}
+
+\clearpage
+\subsection*{Example file}
+\lstinputlisting[style=rust-bw]{demo-example.rs}
+
+
+\clearpage
+\section*{Adding \texttt{boxed}}
+\lstinputlisting[style=rust,style=boxed,caption={Some Identifiers}]{demo-identifiers.rs}
+
+\clearpage
+\section*{Adding \texttt{lined}}
+\lstinputlisting[style=rust,style=lined,caption={Some Identifiers}]{demo-identifiers.rs}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
