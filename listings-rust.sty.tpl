@@ -1,8 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{listings-rust}[2021/10/21 Rust Listings]
 
-%\PassOptionsToPackage{procnames}{listings}
-
 \RequirePackage{color}
 \RequirePackage[procnames]{listings}
 \RequirePackage{accsupp}
@@ -155,7 +153,10 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[12]{}, % Other Keywords
 %, columns=spaceflexible%
 	%
-	literate={\&}{{ "{{{\bfseries\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1,% rgb(66, 113, 174)
+	literate=%
+		{\&}{{ "{{{\bfseries\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1 % The ampersand rgb(66, 113, 174)
+		{'}{{ "{{{\textquotesingle}}}" }}1 % Keeps apostrophes straight
+	,% end of literate
 	%
 	columns=fixed, %
 	keepspaces=true, %
@@ -186,9 +187,12 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[11]{\color[rgb]{0.259, 0.443, 0.682}}, % Ty Keywords
 	keywordstyle=[12]{\bfseries}, % Other Keywords
 	%
-	literate={\&}{{ "{{{\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1,% rgb(66, 113, 174)
+	literate=%
+		{\&}{{ "{{{\bfseries\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1 % The ampersand rgb(66, 113, 174)
+		{'}{{ "{{{\textquotesingle}}}" }}1 % Keeps apostrophes straight
+	,% end of literate
 	%
-	columns=spaceflexible, %
+	columns=fixed, %
 	keepspaces=true, %
 	showspaces=false, %
 	showtabs=false, %
@@ -203,6 +207,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	identifierstyle=, %
 	commentstyle={\itshape\color[gray]{0.302}}, % #4D4D4C
 	stringstyle={}, %
+	%
 	keywordstyle=[1]{}, % structs
 	keywordstyle=[2]{}, % enums
 	keywordstyle=[3]{}, % traits
@@ -215,6 +220,12 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[10]{\bfseries}, % Stmt keywords
 	keywordstyle=[11]{}, % Ty keywords
 	keywordstyle=[12]{\bfseries}, % Other keywords
+	%
+	literate=%
+		{\&}{{ "{{{\bfseries\&}}}" }}1 % The ampersand
+		{'}{{ "{{{\textquotesingle}}}" }}1 % Keeps apostrophes straight
+	,% end of literate
+	%
 	columns=fixed, %
 	keepspaces=true, %
 	showspaces=false, %
@@ -228,11 +239,10 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	numbers=left, %
 	firstnumber=auto, %
 	numberblanklines=true, %
-	breaklines=true,
-	breakatwhitespace=true,
+	breaklines=true, %
+	breakatwhitespace=true, %
 	frame=trbL, %
 	numberstyle={\tiny\noncopynumber}, %
-	columns=flexible, %
 	frame=leftline, %
 	numbersep=3pt, %
 	framesep=5pt, %
@@ -244,21 +254,21 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 
 % Adds line number and a horizontal lines
 \lstdefinestyle{lined}{ %
-	float=tbph,%
-	frame=lines,
-	framesep=5pt,
-	captionpos=b,
-	abovecaptionskip=1em,
-	numbers=left,
-	breaklines=true,
-	breakatwhitespace=true,
+	float=tbph, %
+	frame=lines, %
+	framesep=5pt, %
+	captionpos=b, %
+	abovecaptionskip=1em, %
+	numbers=left, %
+	breaklines=true, %
+	breakatwhitespace=true, %
 %	prebreak=\raisebox{0ex}[0ex][0ex]{\color{gray}\ensuremath{\searrow}},
-	xleftmargin=15pt,
-	framexleftmargin=15pt,
-	numberstyle=\tiny,
-	numbersep=5pt,
-	stepnumber=1,
-	fontadjust,
+	xleftmargin=15pt, %
+	framexleftmargin=15pt, %
+	numberstyle=\tiny, %
+	numbersep=5pt, %
+	stepnumber=1, %
+	fontadjust, %
 }
 
 
