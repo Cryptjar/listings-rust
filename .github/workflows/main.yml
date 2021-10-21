@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This "builds" the style-file
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install tera CLI
+        run: cargo install tera-cli
+
+      - name: Run Makefile
+        run: make listings-rust.sty
+
+      # Save generate style-file
+      - name: Upload style-file
+        uses: actions/upload-artifact@v2
+        with:
+          name: style-file
+          path: listings-rust.sty
+  
+  # This "builds" the demo PDF
+  demo:
+    needs: build
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Download style-file
+        uses: actions/download-artifact@v2
+        with:
+          name: style-file
+      
+      # Run latexmk to build the demo
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: demo.tex
+
+      # Save generate demo PDF
+      - name: Upload demo
+        uses: actions/upload-artifact@v2
+        with:
+          name: demo
+          path: demo.pdf
