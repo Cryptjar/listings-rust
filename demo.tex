@@ -12,9 +12,18 @@
 Adam Wagenhäuser \\ \href{mailto:adam.wagenhaeuser@fau.de}{\texttt{adam.wagenhaeuser@fau.de}}}
 
 % Adding our local custom types
+%
+% Keyword classes:
+% [1] structs
+% [2] enums
+% [3] traits
+% [4] macros
+% [5] typdef
+% [6] unions
+%
 \lstset{%
 	morekeywords=[1]{Foo, TreeStack}, % structs
-	morekeywords=[3]Bar, % traits
+	morekeywords=[3]{Bar}, % traits
 }
 
 
@@ -22,11 +31,11 @@ Adam Wagenhäuser \\ \href{mailto:adam.wagenhaeuser@fau.de}{\texttt{adam.wagenha
 
 \maketitle
 
-
-\begin{lstlisting}[style=boxed,style=rust-defs,morekeywords={[1]Foo},morekeywords={[3]Bar}]
+% `rust-defs` style with `boxed` and the additional trait `Baz` and `Bar`
+\begin{lstlisting}[style=boxed,style=rust-defs,morekeywords={[3]Baz,Bar}]
 /// A good struct
 struct Foo<T: Into<u32>(T);
-trait Bar {
+trait Bar: Baz {
     fn bar(n: i32) -> &'static dyn Option<File>;
 }
 #[doc(hidden)]
@@ -37,6 +46,7 @@ mod sub {
 \end{lstlisting}
 
 
+% the plain `rust` style
 \begin{lstlisting}[style=rust]
 #[allow(unused)]
 pub const A: u32 = 42 as u32;
@@ -51,6 +61,7 @@ if let Some(ref mut n) = crate::Foo::foo(A.pow(12)) {
 \end{lstlisting}
 
 
+% `rust-bw` style with `lined`
 \begin{lstlisting}[style=lined,style=rust-bw]
 impl Bar for Foo {
     // The perfect implementation

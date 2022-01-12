@@ -7,7 +7,7 @@ union unsafe use where while
 "this is a test" 'a' 'b' 'c' 123 0xf00d 1_000u32
 
 // primitive types
-bool char f32 f64 i8 i16 i32 i64 isize never str u8 u16 u32 u64 unit usize i128
+bool char f32 f64 i8 i16 i32 i64 isize ! str u8 u16 u32 u64 usize i128
 u128
 
 // some common type and value constructors

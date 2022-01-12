@@ -13,3 +13,6 @@ listings-rust.sty: std-names.toml listings-rust.sty.tpl
 demo.pdf: listings-rust.sty demo.tex demo-example.rs demo-identifiers.rs
 	latexmk -pdf demo.tex
 
+clean:
+	latexmk -C demo.tex
+	rm -f std-names.toml listings-rust.sty demo.pdf

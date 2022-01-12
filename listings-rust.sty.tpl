@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{listings-rust}[2021/10/21 Rust Listings]
+\ProvidesPackage{listings-rust}[2022/01/12 Rust Listings]
 
 \RequirePackage{color}
 \RequirePackage[procnames]{listings}
@@ -48,47 +48,68 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	%
 	% Keyword classes
 	%
-	% [1] structs
-	% [2] enums
-	% [3] traits
-	% [4] macros
-	% [5] typdef
-	% [6] unions
+	% [1] user structs
+	% [2] user enums
+	% [3] user traits
+	% [4] user macros
+	% [5] user typdef
+	% [6] user unions
 	% [7] primitive types
 	% [8] type and value constructors
 	% [9] definition keywords
 	% [10] statement keywords
 	% [11] type-like keywords
 	% [12] other keywords
+	% [13] user structs
+	% [14] generated enums
+	% [15] generated traits
+	% [16] generated macros
+	% [17] generated typdef
+	% [18] generated unions
+	%
+	% About the keyword classes, we want to allow users to easily add custom
+	% struct names and stuff, however we also want the predefined stuff in
+	% classes 7-12 to take precedence over the automatically generate names.
+	% Thus automatically generated names get classes 13-18, which the
+	% corresponding user defined classes are 1-6.
+	%
+	% This complicated arrangement is particularly important, because as of the
+	% time of writing there is a struct definition with named `bool` somewhere
+	% in the Rust source. Thus if the priorities are neglected, `bool` gets
+	% highlighted as struct instead of a primitive type.
+	%
+	% While the automatically generated names could be filtered for occurrences,
+	% of `bool` or any other perdefined name, it actually seems easier and more
+	% robust to just adjust the order of definition.
 	%
 	%
 	% Struct Type Names
 	%
-	morekeywords=[1]{ {{ structs }} }, %
+	morekeywords=[1]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Enum Type Names
 	%
-	morekeywords=[2]{ {{ enums }} }, %
+	morekeywords=[2]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Trait Names
 	%
-	morekeywords=[3]{ {{ traits }} }, %
+	morekeywords=[3]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Macro Names
 	%
-	morekeywords=[4]{ {{ macros }} }, %
+	morekeywords=[4]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Typedefs
 	%
-	morekeywords=[5]{ {{ typdefs }} }, %
+	morekeywords=[5]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Union Names
 	%
-	morekeywords=[6]{ {{ unions }} }, %
+	morekeywords=[6]{}, % left empty, to be filled by the user via `\lstset`
 	%
 	% Primitive Types
 	%
-	morekeywords=[7]{bool, char, f32, f64, i8, i16, i32, i64, isize, str, u8, u16, u32, u64, unit, usize, i128, u128},  % primitive types
+	morekeywords=[7]{bool, char, f32, f64, i8, i16, i32, i64, isize, str, u8, u16, u32, u64, unit, usize, i128, u128, !},  % primitive types
 	%
 	% Prelude Values and Constructors
 	%
@@ -110,33 +131,69 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	%
 	% Other Keywords
 	%
-	morekeywords=[12]{crate, self, super} % path-likes
+	morekeywords=[12]{crate, self, super}, % path-likes
+	%
+	% Struct Type Names
+	%
+	morekeywords=[13]{ {{ structs }} }, %
+	%
+	% Enum Type Names
+	%
+	morekeywords=[14]{ {{ enums }} }, %
+	%
+	% Trait Names
+	%
+	morekeywords=[15]{ {{ traits }} }, %
+	%
+	% Macro Names
+	%
+	morekeywords=[16]{ {{ macros }} }, %
+	%
+	% Typedefs
+	%
+	morekeywords=[17]{ {{ typdefs }} }, %
+	%
+	% Union Names
+	%
+	morekeywords=[18]{ {{ unions }} }, %
+	%
+	%
 }%
 
-% [1] structs
-% [2] enums
-% [3] traits
-% [4] macros
-% [5] typdef
-% [6] unions
+% [1] user structs
+% [2] user enums
+% [3] user traits
+% [4] user macros
+% [5] user typdef
+% [6] user unions
 % [7] primitive types
 % [8] type and value constructors
 % [9] definition keywords
 % [10] statement keywords
 % [11] type-like keywords
 % [12] other keywords
+% [13] user structs
+% [14] generated enums
+% [15] generated traits
+% [16] generated macros
+% [17] generated typdef
+% [18] generated unions
 
 
 \lstdefinestyle{rust-defs}{ %
 	basicstyle=\ttfamily, %
 	language=rust, %
+	%
 	identifierstyle=, %
-	procnamestyle=\color[rgb]{0.604, 0.431, 0.192}, % function declaration rgb(154, 110, 49)
 	commentstyle={\itshape\color[gray]{0.302}}, % #4D4D4C
 	stringstyle=\color[rgb]{0.443, 0.549, 0.0}, % #718C00
 	%
+	% function/static/const names in declarations
+	procnamestyle=\color[rgb]{0.604, 0.431, 0.192}, % function declaration rgb(154, 110, 49)
+	%
 	% Attributes, e.g. `#[foobar]` => rgb(200, 40, 41)
 	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#[}{]}, %
+	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#![}{]}, %
 	%
 	keywordstyle=[1]\color[rgb]{0.678, 0.267, 0.557}, % structs #ad448e
 	keywordstyle=[2]\color[rgb]{0.314, 0.505, 0.341}, % enums #508157
@@ -151,7 +208,13 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[10]\bfseries, % Stmt Keywords
 	keywordstyle=[11]{\color[rgb]{0.259, 0.443, 0.682}}, % Ty Keywords
 	keywordstyle=[12]{}, % Other Keywords
-%, columns=spaceflexible%
+	%
+	keywordstyle=[13]\color[rgb]{0.678, 0.267, 0.557}, % structs #ad448e
+	keywordstyle=[14]\color[rgb]{0.314, 0.505, 0.341}, % enums #508157
+	keywordstyle=[15]\color[rgb]{0.486, 0.353, 0.953}, % traits #7c5af3
+	keywordstyle=[16]\color[rgb]{0.024, 0.502, 0.000}, % macros #068000
+	keywordstyle=[17]\color[rgb]{0.729, 0.365, 0.000}, % typdef #ba5d00
+	keywordstyle=[18]\color[rgb]{0.462, 0.482, 0.153}, % unions #767b27
 	%
 	literate=%
 		{\&}{{ "{{{\bfseries\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1 % The ampersand rgb(66, 113, 174)
@@ -168,11 +231,14 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 \lstdefinestyle{rust}{ %
 	basicstyle=\ttfamily, %
 	language=rust, %
-	% Attributes, e.g. `#[foobar]` => rgb(200, 40, 41)
-	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#[}{]}, %
+	%
 	identifierstyle=, %
 	commentstyle={\itshape\color[gray]{0.302}}, % #4D4D4C
 	stringstyle=\color[rgb]{0.443, 0.549, 0.0}, % #718C00
+	%
+	% Attributes, e.g. `#[foobar]` => rgb(200, 40, 41)
+	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#[}{]}, %
+	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#![}{]}, %
 	%
 	keywordstyle=[1]{}, % structs
 	keywordstyle=[2]{}, % enums
@@ -180,12 +246,20 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[4]\color[rgb]{0.243, 0.600, 0.624}, % macros #3E999F
 	keywordstyle=[5]{}, % typdefs
 	keywordstyle=[6]{}, % unions
+	%
 	keywordstyle=[7]\color[rgb]{0.173, 0.502, 0.576}, % primitive types rgb(44, 128, 147)
 	keywordstyle=[8]\color[rgb]{0.784, 0.157, 0.161}, % prelude values #C82829
 	keywordstyle=[9]{\color[rgb]{0.537, 0.349, 0.659}}, % Def keywords #8959A8
 	keywordstyle=[10]{\color[rgb]{0.537, 0.349, 0.659}}, % Stmt keywords #8959A8
 	keywordstyle=[11]{\color[rgb]{0.259, 0.443, 0.682}}, % Ty Keywords
 	keywordstyle=[12]{\bfseries}, % Other Keywords
+	%
+	keywordstyle=[13]{}, % structs
+	keywordstyle=[14]{}, % enums
+	keywordstyle=[15]{}, % traits
+	keywordstyle=[16]\color[rgb]{0.243, 0.600, 0.624}, % macros #3E999F
+	keywordstyle=[17]{}, % typdefs
+	keywordstyle=[18]{}, % unions
 	%
 	literate=%
 		{\&}{{ "{{{\bfseries\color[rgb]{0.259, 0.443, 0.682}\&}}}" }}1 % The ampersand rgb(66, 113, 174)
@@ -202,11 +276,14 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 \lstdefinestyle{rust-bw}{ %
 	basicstyle=\ttfamily, %
 	language=rust, %
-	% Attributes, e.g. `#[foobar]` => rgb(200, 40, 41)
-	moredelim=[s][{\itshape}]{\#[}{]}, %
+	%
 	identifierstyle=, %
 	commentstyle={\itshape\color[gray]{0.302}}, % #4D4D4C
 	stringstyle={}, %
+	%
+	% Attributes, e.g. `#[foobar]` => rgb(200, 40, 41)
+	moredelim=[s][{\slshape}]{\#[}{]}, %
+	moredelim=[s][{\slshape}]{\#![}{]}, %
 	%
 	keywordstyle=[1]{}, % structs
 	keywordstyle=[2]{}, % enums
@@ -214,12 +291,20 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[4]{}, % macros
 	keywordstyle=[5]{}, % typdef
 	keywordstyle=[6]{}, % union
+	%
 	keywordstyle=[7]{\bfseries}, % primitive types
 	keywordstyle=[8]{}, % primitive types
 	keywordstyle=[9]{\bfseries}, % Def keywords
 	keywordstyle=[10]{\bfseries}, % Stmt keywords
 	keywordstyle=[11]{}, % Ty keywords
 	keywordstyle=[12]{\bfseries}, % Other keywords
+	%
+	keywordstyle=[13]{}, % structs
+	keywordstyle=[14]{}, % enums
+	keywordstyle=[15]{}, % traits
+	keywordstyle=[16]{}, % macros
+	keywordstyle=[17]{}, % typdef
+	keywordstyle=[18]{}, % union
 	%
 	literate=%
 		{\&}{{ "{{{\bfseries\&}}}" }}1 % The ampersand
