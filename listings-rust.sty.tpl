@@ -60,7 +60,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	% [10] statement keywords
 	% [11] type-like keywords
 	% [12] other keywords
-	% [13] user structs
+	% [13] generated structs
 	% [14] generated enums
 	% [15] generated traits
 	% [16] generated macros
@@ -83,27 +83,27 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	% robust to just adjust the order of definition.
 	%
 	%
-	% Struct Type Names
+	% User Struct Type Names
 	%
 	morekeywords=[1]{}, % left empty, to be filled by the user via `\lstset`
 	%
-	% Enum Type Names
+	% User Enum Type Names
 	%
 	morekeywords=[2]{}, % left empty, to be filled by the user via `\lstset`
 	%
-	% Trait Names
+	% User Trait Names
 	%
 	morekeywords=[3]{}, % left empty, to be filled by the user via `\lstset`
 	%
-	% Macro Names
+	% User Macro Names
 	%
 	morekeywords=[4]{}, % left empty, to be filled by the user via `\lstset`
 	%
-	% Typedefs
+	% User Typedefs
 	%
 	morekeywords=[5]{}, % left empty, to be filled by the user via `\lstset`
 	%
-	% Union Names
+	% User Union Names
 	%
 	morekeywords=[6]{}, % left empty, to be filled by the user via `\lstset`
 	%
@@ -133,46 +133,49 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	%
 	morekeywords=[12]{crate, self, super}, % path-likes
 	%
-	% Struct Type Names
+	% Generated Struct Type Names
 	%
 	morekeywords=[13]{ {{ structs }} }, %
 	%
-	% Enum Type Names
+	% Generated Enum Type Names
 	%
 	morekeywords=[14]{ {{ enums }} }, %
 	%
-	% Trait Names
+	% Generated Trait Names
 	%
 	morekeywords=[15]{ {{ traits }} }, %
 	%
-	% Macro Names
+	% Generated Macro Names
 	%
 	morekeywords=[16]{ {{ macros }} }, %
 	%
-	% Typedefs
+	% Generated Typedefs
 	%
 	morekeywords=[17]{ {{ typdefs }} }, %
 	%
-	% Union Names
+	% Generated Union Names
 	%
 	morekeywords=[18]{ {{ unions }} }, %
 	%
 	%
 }%
 
+% User-defined types
 % [1] user structs
 % [2] user enums
 % [3] user traits
 % [4] user macros
 % [5] user typdef
 % [6] user unions
+% Primitive types & Keywords
 % [7] primitive types
 % [8] type and value constructors
 % [9] definition keywords
 % [10] statement keywords
 % [11] type-like keywords
 % [12] other keywords
-% [13] user structs
+% Core & Std types
+% [13] generated structs
 % [14] generated enums
 % [15] generated traits
 % [16] generated macros
@@ -195,6 +198,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#[}{]}, %
 	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#![}{]}, %
 	%
+	% User-defined types
 	keywordstyle=[1]\color[rgb]{0.678, 0.267, 0.557}, % structs #ad448e
 	keywordstyle=[2]\color[rgb]{0.314, 0.505, 0.341}, % enums #508157
 	keywordstyle=[3]\color[rgb]{0.486, 0.353, 0.953}, % traits #7c5af3
@@ -202,6 +206,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[5]\color[rgb]{0.729, 0.365, 0.000}, % typdef #ba5d00
 	keywordstyle=[6]\color[rgb]{0.462, 0.482, 0.153}, % unions #767b27
 	%
+	% Primitive types & Keywords
 	keywordstyle=[7]\color[rgb]{0.173, 0.502, 0.576}, % primitive types rgb(44	128, 147)
 	keywordstyle=[8]\color[rgb]{0.784, 0.157, 0.161}, % prelude values #C82829
 	keywordstyle=[9]\bfseries, % Def Keywords
@@ -209,6 +214,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[11]{\color[rgb]{0.259, 0.443, 0.682}}, % Ty Keywords
 	keywordstyle=[12]{}, % Other Keywords
 	%
+	% Core & Std types
 	keywordstyle=[13]\color[rgb]{0.678, 0.267, 0.557}, % structs #ad448e
 	keywordstyle=[14]\color[rgb]{0.314, 0.505, 0.341}, % enums #508157
 	keywordstyle=[15]\color[rgb]{0.486, 0.353, 0.953}, % traits #7c5af3
@@ -240,6 +246,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#[}{]}, %
 	moredelim=[s][{\color[rgb]{0.784, 0.157, 0.161}}]{\#![}{]}, %
 	%
+	% User-defined types
 	keywordstyle=[1]{}, % structs
 	keywordstyle=[2]{}, % enums
 	keywordstyle=[3]{}, % traits
@@ -247,6 +254,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[5]{}, % typdefs
 	keywordstyle=[6]{}, % unions
 	%
+	% Primitive types & Keywords
 	keywordstyle=[7]\color[rgb]{0.173, 0.502, 0.576}, % primitive types rgb(44, 128, 147)
 	keywordstyle=[8]\color[rgb]{0.784, 0.157, 0.161}, % prelude values #C82829
 	keywordstyle=[9]{\color[rgb]{0.537, 0.349, 0.659}}, % Def keywords #8959A8
@@ -254,6 +262,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[11]{\color[rgb]{0.259, 0.443, 0.682}}, % Ty Keywords
 	keywordstyle=[12]{\bfseries}, % Other Keywords
 	%
+	% Core & Std types
 	keywordstyle=[13]{}, % structs
 	keywordstyle=[14]{}, % enums
 	keywordstyle=[15]{}, % traits
@@ -285,6 +294,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	moredelim=[s][{\slshape}]{\#[}{]}, %
 	moredelim=[s][{\slshape}]{\#![}{]}, %
 	%
+	% User-defined types
 	keywordstyle=[1]{}, % structs
 	keywordstyle=[2]{}, % enums
 	keywordstyle=[3]{}, % traits
@@ -292,6 +302,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[5]{}, % typdef
 	keywordstyle=[6]{}, % union
 	%
+	% Primitive types & Keywords
 	keywordstyle=[7]{\bfseries}, % primitive types
 	keywordstyle=[8]{}, % primitive types
 	keywordstyle=[9]{\bfseries}, % Def keywords
@@ -299,6 +310,7 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 	keywordstyle=[11]{}, % Ty keywords
 	keywordstyle=[12]{\bfseries}, % Other keywords
 	%
+	% Core & Std types
 	keywordstyle=[13]{}, % structs
 	keywordstyle=[14]{}, % enums
 	keywordstyle=[15]{}, % traits
