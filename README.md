@@ -2,9 +2,9 @@
 
 A Rust language and style specification for the LaTeX-package [listings](https://ctan.org/pkg/listings).
 
-See [demo.pdf](https://github.com/Cryptjar/listings-rust/releases/latest/download/demo.pdf) for a quick demo.
+See [demo.pdf](https://github.com/Cryptjar/listings-rust/releases/latest/download/demo.pdf) for a quick demo:
 
-![preview](etc/demo-image.gif)
+[![preview](etc/demo-image.gif)](https://github.com/Cryptjar/listings-rust/releases/latest/download/demo.pdf)
 
 
 ## Usage
