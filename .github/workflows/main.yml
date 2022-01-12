@@ -7,6 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
+    tags:
   pull_request:
     branches: [ master ]
 
@@ -46,6 +47,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      # Download the artifact of the build job
       - name: Download style-file
         uses: actions/download-artifact@v2
         with:
@@ -62,3 +64,35 @@ jobs:
         with:
           name: demo
           path: demo.pdf
+
+  release:
+    needs: [build, demo]
+    
+    # Only execute for tags
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Download the artifact of the build job
+      - name: Download style-file
+        uses: actions/download-artifact@v2
+        with:
+          name: style-file
+      
+      # Download the PDF of the demo job
+      - name: Download demo
+        uses: actions/download-artifact@v2
+        with:
+          name: demo
+      
+      # Create a GitHub Release with the two artifacts, if this is a git tag
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          files: |
+            listings-rust.sty
+            demo.pdf
+
