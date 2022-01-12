@@ -4,8 +4,6 @@ A Rust language and style specification for the LaTeX-package listings.
 
 See [demo.pdf](https://github.com/Cryptjar/listings-rust/releases/latest/download/demo.pdf) for a quick demo.
 
-For quick start see the [usage](#usage) section.
-
 
 ## Usage
 
@@ -18,7 +16,7 @@ For quick start see the [usage](#usage) section.
   // your source code
   \end{lstlisting}
   ```
-* or select one of the alternative styles `rust-def`, `rust-bw`, or mix it with further styling such `boxed` and `lined`, e.g.
+* or select one of the alternative styles `rust-defs`, `rust-bw`, or mix it with further styling such `boxed` and `lined`, e.g.
   ```latex
   \begin{lstlisting}[style=rust-def, style=boxed]
   // your source code
