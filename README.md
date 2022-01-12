@@ -1,8 +1,10 @@
 # listings-rust
 
-A Rust language and style specification for the LaTeX-package listings.
+A Rust language and style specification for the LaTeX-package [listings](https://ctan.org/pkg/listings).
 
 See [demo.pdf](https://github.com/Cryptjar/listings-rust/releases/latest/download/demo.pdf) for a quick demo.
+
+![preview](etc/demo-image.gif)
 
 
 ## Usage
