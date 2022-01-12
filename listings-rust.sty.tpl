@@ -321,39 +321,35 @@ A little hacky way to color numerals. Doesn't really work, just colors all digit
 
 % Adds a line number and 'boxes' the code via background color
 \lstdefinestyle{boxed}{ %
-	numbers=left, %
 	firstnumber=auto, %
+	stepnumber=1, %
+	numbers=left, %
+	numberstyle={\tiny\noncopynumber}, %
+	numbersep=3pt, %
 	numberblanklines=true, %
 	breaklines=true, %
 	breakatwhitespace=true, %
-	frame=trbL, %
-	numberstyle={\tiny\noncopynumber}, %
 	frame=leftline, %
-	numbersep=3pt, %
 	framesep=5pt, %
 	framerule=15pt, %
-	xleftmargin=15pt, %
 	backgroundcolor=\color[gray]{0.97}, %
 	rulecolor=\color[gray]{0.90}, %
 }
 
 % Adds line number and a horizontal lines
 \lstdefinestyle{lined}{ %
-	float=tbph, %
+	firstnumber=auto, %
+	stepnumber=1, %
+	numbers=left, %
+	numberstyle={\tiny\noncopynumber}, %
+	numbersep=3pt, %
+	numberblanklines=true, %
+	breaklines=true, %
+	breakatwhitespace=true, %
 	frame=lines, %
 	framesep=5pt, %
 	captionpos=b, %
-	abovecaptionskip=1em, %
-	numbers=left, %
-	breaklines=true, %
-	breakatwhitespace=true, %
-%	prebreak=\raisebox{0ex}[0ex][0ex]{\color{gray}\ensuremath{\searrow}},
-	xleftmargin=15pt, %
-	framexleftmargin=15pt, %
-	numberstyle=\tiny, %
-	numbersep=5pt, %
-	stepnumber=1, %
-	fontadjust, %
+	abovecaptionskip=0.5em, %
 }
 
 
